@@ -76,7 +76,7 @@ public class ActivitiIT {
         this.reset(mysql, rmq);
 
         // create services required
-        Stream.of("p-mysql 100mb " + mysql, "cloudamqp lemur " + rmq)
+        Stream.of("cleardb spark " + mysql, "cloudamqp lemur " + rmq)
                 .map(x -> x.split(" ")).parallel()
                 .forEach(t -> this.cloudFoundryService.createService(t[0], t[1], t[2]));
 
