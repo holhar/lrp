@@ -26,8 +26,7 @@ class WorkerConfiguration {
 
     // <3>
     @Bean
-    StepExecutionRequestHandler stepExecutionRequestHandler(JobExplorer explorer,
-                                                            StepLocator stepLocator) {
+    StepExecutionRequestHandler stepExecutionRequestHandler(JobExplorer explorer, StepLocator stepLocator) {
         StepExecutionRequestHandler handler = new StepExecutionRequestHandler();
         handler.setStepLocator(stepLocator);
         handler.setJobExplorer(explorer);
@@ -36,14 +35,9 @@ class WorkerConfiguration {
 
     // <4>
     @Bean
-    IntegrationFlow stepExecutionRequestHandlerFlow(WorkerChannels channels,
-                                                    StepExecutionRequestHandler handler) {
-
+    IntegrationFlow stepExecutionRequestHandlerFlow(WorkerChannels channels, StepExecutionRequestHandler handler) {
         MessageChannel channel = channels.workerRequestsChannels();
-        //@formatter:off
-        GenericHandler<StepExecutionRequest> h =
-                (payload, headers) -> handler.handle(payload);
-        //@formatter:on
+        GenericHandler<StepExecutionRequest> h = (payload, headers) -> handler.handle(payload);
         return IntegrationFlows.from(channel)
                 .handle(StepExecutionRequest.class, h)
                 .channel(channels.workerRepliesChannels()).get();

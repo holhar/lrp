@@ -30,8 +30,7 @@ class WorkerStepConfiguration {
                                         @Value("#{stepExecutionContext['maxValue']}") Long max) {
 
         MySqlPagingQueryProvider queryProvider = new MySqlPagingQueryProvider();
-        queryProvider
-                .setSelectClause("id as id, email as email, age as age, first_name as firstName");
+        queryProvider.setSelectClause("id as id, email as email, age as age, first_name as firstName");
         queryProvider.setFromClause("from PEOPLE");
         queryProvider.setWhereClause("where id >= " + min + " and id <= " + max);
         queryProvider.setSortKeys(Collections.singletonMap("id", Order.ASCENDING));
@@ -51,8 +50,7 @@ class WorkerStepConfiguration {
         return new JdbcBatchItemWriterBuilder<Person>()
                 .beanMapped()
                 .dataSource(ds)
-                .sql(
-                        "INSERT INTO NEW_PEOPLE(age,first_name,email) VALUES(:age, :firstName, :email )")
+                .sql("INSERT INTO NEW_PEOPLE(age,first_name,email) VALUES(:age, :firstName, :email )")
                 .build();
     }
 

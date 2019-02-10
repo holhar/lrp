@@ -47,8 +47,7 @@ class Step2Configuration {
     JdbcBatchItemWriter<Person> jdbcWriter(DataSource ds) { // <5>
         return new JdbcBatchItemWriterBuilder<Person>()
                 .dataSource(ds)
-                .sql(
-                        "insert into PEOPLE( AGE, FIRST_NAME, EMAIL)"
+                .sql("insert into PEOPLE( AGE, FIRST_NAME, EMAIL)"
                                 + " values (:age, :firstName, :email)").beanMapped().build();
     }
 }

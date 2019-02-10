@@ -28,8 +28,7 @@ class LeaderStepConfiguration {
 
     // <2>
     @Bean
-    Step partitionStep(StepBuilderFactory sbf, Partitioner p, PartitionHandler ph,
-                       WorkerStepConfiguration wsc) {
+    Step partitionStep(StepBuilderFactory sbf, Partitioner p, PartitionHandler ph, WorkerStepConfiguration wsc) {
         Step workerStep = wsc.workerStep(null);
         return sbf.get("partitionStep").partitioner(workerStep.getName(), p)
                 .partitionHandler(ph).build();
@@ -37,13 +36,9 @@ class LeaderStepConfiguration {
 
     // <3>
     @Bean
-    MessageChannelPartitionHandler partitionHandler(
-            @Value("${partition.grid-size:4}") int gridSize,
+    MessageChannelPartitionHandler partitionHandler(@Value("${partition.grid-size:4}") int gridSize,
             MessagingTemplate messagingTemplate, JobExplorer jobExplorer) {
-        //@formatter:off
-        MessageChannelPartitionHandler ph =
-                new MessageChannelPartitionHandler();
-        //@formatter:on
+        MessageChannelPartitionHandler ph = new MessageChannelPartitionHandler();
         ph.setMessagingOperations(messagingTemplate);
         ph.setJobExplorer(jobExplorer);
         ph.setStepName("workerStep");
