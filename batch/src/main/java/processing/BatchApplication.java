@@ -35,11 +35,12 @@ public class BatchApplication {
 
     // <1>
     @Bean
-    CommandLineRunner run(JobLauncher launcher, Job job,
-                          @Value("${user.home}") String home) {
-        return args -> launcher.run(job,
-                new JobParametersBuilder().addString("input", path(home, "in.csv"))
-                        .addString("output", path(home, "out.csv")).toJobParameters());
+    CommandLineRunner run(JobLauncher launcher, Job job, @Value("${user.home}") String home) {
+
+        return args -> launcher.run(job, new JobParametersBuilder()
+                        .addString("input", path(home, "projects/java/cloud-native-java/lrp/batch/in.csv"))
+                        .addString("output", path(home, "projects/java/cloud-native-java/lrp/batch/out.csv"))
+                        .toJobParameters());
     }
 
     private String path(String home, String fileName) {
