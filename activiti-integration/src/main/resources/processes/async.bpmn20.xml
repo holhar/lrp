@@ -13,11 +13,9 @@
         <sequenceFlow id="f1" sourceRef="start" targetRef="spring-gateway"/>
 
         <!--1-->
-        <serviceTask id="spring-gateway"
-          activiti:delegateExpression="#{gateway}"/>
+        <serviceTask id="spring-gateway" activiti:delegateExpression="#{gateway}"/>
 
-        <sequenceFlow id="f2" sourceRef="spring-gateway"
-          targetRef="confirm-movement"/>
+        <sequenceFlow id="f2" sourceRef="spring-gateway" targetRef="confirm-movement"/>
 
         <!--2-->
         <scriptTask id="confirm-movement" scriptFormat="groovy">

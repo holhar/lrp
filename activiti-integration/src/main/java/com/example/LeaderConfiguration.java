@@ -23,10 +23,7 @@ class LeaderConfiguration {
 
             @Override
             public void execute(ActivityExecution execution) throws Exception {
-
-                Message<?> executionMessage = MessageBuilder.withPayload(execution.getId())
-                        .build();
-
+                Message<?> executionMessage = MessageBuilder.withPayload(execution.getId()).build();
                 channels.leaderRequests().send(executionMessage);
             }
         };

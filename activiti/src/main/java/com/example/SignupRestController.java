@@ -48,8 +48,7 @@ class SignupRestController {
                 "signup",
                 Collections.singletonMap(CUSTOMER_ID_PV_KEY, Long.toString(save.getId())))
                 .getId();
-        this.log.info("started sign-up. the processInstance ID is "
-                + processInstanceId);
+        this.log.info("started sign-up. the processInstance ID is " + processInstanceId);
 
         return ResponseEntity.ok(save.getId());
     }
