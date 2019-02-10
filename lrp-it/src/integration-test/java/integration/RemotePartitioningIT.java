@@ -12,7 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestTemplate;
 
@@ -41,7 +40,7 @@ public class RemotePartitioningIT {
     @Before
     public void before() throws Throwable {
         Stream
-                .of("p-mysql 100mb " + mysql, "cloudamqp lemur " + rmq)
+                .of("cleardb spark " + mysql, "cloudamqp lemur " + rmq)
                 .map(x -> x.split(" "))
                 .forEach(
                         t -> this.cloudFoundryService.createServiceIfMissing(t[0], t[1], t[2]));
